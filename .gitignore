@@ -341,4 +341,6 @@ healthchecksdb
 
 #
 soundsforanno.devplayground/
-soundsforanno.transcription/lib/
+soundsforanno.transcription/lib/ffmpeg.exe
+soundsforanno.transcription/lib/*.pbmm
+soundsforanno.transcription/lib/*.scorer

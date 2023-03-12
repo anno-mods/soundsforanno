@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "soundsforanno.app": {
+      "commandName": "Project",
+      "commandLineArgs": "gen -f sound_en.json sound_de.json -g 69420000 -a -s sound_en.bnk"
+    }
+  }
+}

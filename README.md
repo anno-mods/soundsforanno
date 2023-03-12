@@ -12,6 +12,14 @@ The tool uses Mozillas DeepSpeech with pretrained english models to autotranscri
 
 This tool is powered by: 
 
-- ![eXpl0it3r/bnkextr](https://github.com/eXpl0it3r/bnkextr)
-- ![mozilla/DeepSpeech](https://github.com/mozilla/DeepSpeech)
-- ![vgmstream](https://github.com/vgmstream/vgmstream/)
+- [eXpl0it3r/bnkextr](https://github.com/eXpl0it3r/bnkextr)
+- [mozilla/DeepSpeech](https://github.com/mozilla/DeepSpeech)
+- [vgmstream](https://github.com/vgmstream/vgmstream/)
+- [ffmpeg](https://ffmpeg.org/)
+
+# Building 
+
+- You need Visual Studio 2022
+- You need pretrained models for DeepSpeech [here](https://github.com/mozilla/DeepSpeech/releases) as well as the scorer
+- and ffmpeg 
+- Place the models as "english.pbmm" and "english.scorer" as well as ffmpeg in soundsforanno.transcription/lib folder

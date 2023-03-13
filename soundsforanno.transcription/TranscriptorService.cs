@@ -9,7 +9,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
-using SoundsForAnno.Assetexport;
 
 namespace SoundsForAnno.Transcription
 {
@@ -62,11 +61,13 @@ namespace SoundsForAnno.Transcription
         public async Task ProcessAsync()
         {
             has_started = true;
+            _logger.LogInformation("Started transcribing audio files... This may take a while depending on your computer");
             foreach (var bnk in _bnk_files)
             {
                 await ProcessSingleBank(bnk);
             }
-            is_finished= true;
+            _logger.LogInformation("transcription finished!");
+            is_finished = true;
         }
 
         public Dictionary<string, TextGroup> GetResult()

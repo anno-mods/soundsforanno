@@ -38,7 +38,7 @@ namespace SoundsForAnno.Assetexport.Services
             audio_asset.SelectSingleNode("/Values/Standard/Name").InnerText = ml_event.Name;
             audio_asset.SelectSingleNode("/Values/WwiseStandard/WwiseID").InnerText = ml_event.Id;
             _guidMappingService.AddMapping(ml_event.Id, guid);
-            _logger.LogInformation($"Name: {ml_event.Name}\nGUID:{guid}\nId;{ml_event.Id}");
+            _logger.LogDebug($"[Adding Audio Asset] Name: {ml_event.Name} | GUID: {guid} | Id: {ml_event.Id}");
             _doc.DocumentElement.AppendChild(audio_asset);
         }
     }

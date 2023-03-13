@@ -42,8 +42,9 @@ namespace SoundsForAnno.Assetexport.Services
             asset.SelectSingleNode("/Values/Text").AppendChild(loca_text);
             var guid = _autoGuiding.GiveGuid().ToString();
             asset.SelectSingleNode("/Values/Standard/GUID").InnerText = guid;
-            asset.SelectSingleNode("/Values/Standard/Name").InnerText = $"AT_{ml_event.Name}_{ml_event.Id}";
-            _logger.LogInformation($"Audio Text Exported: {ml_event.Name}\nGUID:{guid}\nId;{ml_event.Id}");
+            var name = $"AT_{ml_event.Name}_{ml_event.Id}";
+            asset.SelectSingleNode("/Values/Standard/Name").InnerText = name ;
+            _logger.LogDebug($"[Adding AudioText Asset] Name: {name} | GUID: {guid} | Id: {ml_event.Id}");
             _doc.DocumentElement.AppendChild(asset);
         }
     }

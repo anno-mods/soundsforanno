@@ -22,6 +22,10 @@ namespace SoundsForAnno.App
         [Option('g', "start-guid", Required = true)]
         public int StartGuid { get; set; }
 
+        [Option('o', "audio-output", Required = false, Default = "audio.xml")]
         public String? OutputFilename { get; set; }
+
+        [Option('t', "text-output", Required = false, Default = "audiotexts.xml")]
+        public String? AudioTextFilename { get; set; }
     }
 }

@@ -5,7 +5,6 @@ using SoundsForAnno.Assetexport.Services;
 using SoundsForAnno.Transcription;
 using SoundsForAnno.App;
 using CommandLine;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 
 using IHost host = Host.CreateDefaultBuilder(args)
@@ -19,17 +18,17 @@ using IHost host = Host.CreateDefaultBuilder(args)
         services.AddSingleton<ITranscriptorService, TranscriptorService>();
         services.AddSingleton<IMultiLanguageMapService, MultiLanguageMapService>();
     })
-    .ConfigureLogging(loggingBuilder => {
-        loggingBuilder.ClearProviders();
-        loggingBuilder.SetMinimumLevel(LogLevel.Information);
+    .ConfigureLogging(builder => {
+        builder.ClearProviders();
+        builder.SetMinimumLevel(LogLevel.Information);
+        builder.AddConsole();
     })
     .Build();
 
-Parser.Default.ParseArguments<SoundsForAnnoOptions>(args).MapResult(
-    (SoundsForAnnoOptions o) => {
+await Parser.Default.ParseArguments<SoundsForAnnoOptions>(args).MapResult(
+    async (SoundsForAnnoOptions o) => {
         var app = host.Services.GetRequiredService<ISoundsForAnnoService>();
-        app.RunAsync(o).Wait();
-        return 0; 
+        await app.RunAsync(o);
     },
-    e => 1
+    err => Task.FromResult(-1)
 );

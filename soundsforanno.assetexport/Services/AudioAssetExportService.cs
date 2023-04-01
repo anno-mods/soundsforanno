@@ -10,7 +10,7 @@ using SoundsForAnno.Serializable;
 
 namespace SoundsForAnno.Assetexport.Services
 {
-    public class AudioAssetExportService : XmlExporterService, IAudioAssetExportService
+    public class AudioAssetExportService : XmlAssetExporterService, IAudioAssetExportService
     {
         static readonly string audio_template = "res/audio.xml";
 

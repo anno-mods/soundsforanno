@@ -14,6 +14,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
         services.AddSingleton<IAutoGuidingService, AutoGuidingService>();
         services.AddSingleton<IGuidMappingService, GuidMappingService>();
         services.AddSingleton<IAudioAssetExportService, AudioAssetExportService>();
+        services.AddSingleton<ILocaFactory, LocaFactory>();
         services.AddSingleton<ITextAssetExportService, AudioTextAssetExportService>();
         services.AddSingleton<ITranscriptorService, TranscriptorService>();
         services.AddSingleton<IMultiLanguageMapService, MultiLanguageMapService>();

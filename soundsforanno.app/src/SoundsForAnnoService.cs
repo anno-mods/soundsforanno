@@ -25,7 +25,8 @@ namespace SoundsForAnno.App
         IAudioAssetExportService _audioAssetExportService;
         ITextAssetExportService _textAssetExportService;
         ITranscriptorService _transcriptorService;
-        ILogger<SoundsForAnnoService> _logger; 
+        ILogger<SoundsForAnnoService> _logger;
+        ILocaFactory _locas;
 
         public SoundsForAnnoService(
             IAutoGuidingService autoGuidingService,
@@ -33,7 +34,8 @@ namespace SoundsForAnno.App
             IAudioAssetExportService audioExportService,
             ITextAssetExportService audioTextExportService,
             ITranscriptorService transcriptorService,
-            ILogger<SoundsForAnnoService> logger
+            ILogger<SoundsForAnnoService> logger,
+            ILocaFactory locas
         ) 
         {
             _autoGuidingService = autoGuidingService;
@@ -41,7 +43,8 @@ namespace SoundsForAnno.App
             _audioAssetExportService = audioExportService;
             _textAssetExportService = audioTextExportService;
             _transcriptorService = transcriptorService;
-            _logger = logger; 
+            _logger = logger;
+            _locas = locas; 
         }
 
         public async Task RunAsync(SoundsForAnnoOptions o)
@@ -80,6 +83,10 @@ namespace SoundsForAnno.App
 
             var generated_textassets = _textAssetExportService.GetResult();
             generated_textassets.Save("audiotexts.xml");
+
+            _locas.Get(Language.fra).GetResult().Save("texts_french.xml");
+            _locas.Get(Language.eng).GetResult().Save("texts_english.xml");
+            _locas.Get(Language.ger).GetResult().Save("texts_german.xml");
         }
     }
 }

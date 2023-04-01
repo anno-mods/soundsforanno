@@ -6,15 +6,17 @@ namespace SoundsForAnno.Assetexport.Interfaces
 {
     public interface IExportService
     {
-        void AddAssets(IEnumerable<MultiLanguageEvent> events);
         XmlDocument GetResult(); 
     }
 
     public interface ITextAssetExportService : IExportService
     {
         void ConfigureTexts(Dictionary<string, TextGroup> texts);
+        void AddAssets(IEnumerable<MultiLanguageEvent> events);
     }
 
     public interface IAudioAssetExportService : IExportService
-    { }
+    {
+        void AddAssets(IEnumerable<MultiLanguageEvent> events);
+    }
 }

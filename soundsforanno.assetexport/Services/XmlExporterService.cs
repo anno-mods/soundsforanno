@@ -8,19 +8,11 @@ using System.Xml.Serialization;
 
 namespace SoundsForAnno.Assetexport.Services
 {
-    public abstract class XmlExporterService
+    public abstract class XmlAssetExporterService : XmlExporterService
     {
-        protected XmlDocument _doc;
-        protected XmlNode _template;
-
         protected IAutoGuidingService _autoGuiding;
-
-        public XmlExporterService(IAutoGuidingService autoGuiding)
+        public XmlAssetExporterService(IAutoGuidingService autoGuiding) : base()
         {
-            _doc = new XmlDocument();
-            var root = _doc.CreateElement("Assets");
-            _doc.AppendChild(root);
-
             _autoGuiding = autoGuiding;
         }
 
@@ -31,6 +23,20 @@ namespace SoundsForAnno.Assetexport.Services
                 AddAsset(x);
             }
         }
+        public abstract void AddAsset(MultiLanguageEvent e);
+
+    }
+    public abstract class XmlExporterService
+    {
+        protected XmlDocument _doc;
+        protected XmlNode _template;
+
+        public XmlExporterService()
+        {
+            _doc = new XmlDocument();
+            var root = _doc.CreateElement("Assets");
+            _doc.AppendChild(root);
+        }
 
         protected void ConfigureTemplate(String template_filename)
         {
@@ -40,8 +46,6 @@ namespace SoundsForAnno.Assetexport.Services
         }
 
         public XmlDocument GetResult() => _doc;
-
-        public abstract void AddAsset(MultiLanguageEvent e);
 
         public XmlNode SerializeToXmlElement(object o)
         {

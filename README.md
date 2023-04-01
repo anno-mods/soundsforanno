@@ -23,3 +23,6 @@ This tool is powered by:
 - You need pretrained models for DeepSpeech [here](https://github.com/mozilla/DeepSpeech/releases) as well as the scorer
 - and ffmpeg 
 - Place the models as "english.pbmm" and "english.scorer" as well as ffmpeg in soundsforanno.transcription/lib folder
+- The german and french models are from the [Scribosermo](https://gitlab.com/Jaco-Assistant/Scribosermo) (formerly deepspeech polygot) project.
+- [Direct link to german](https://drive.google.com/drive/folders/1oO-N-VH_0P89fcRKWEUlVDm-_z18Kbkb)
+- [Direct link to french](https://drive.google.com/drive/folders/1Nk_1uFVwM7lj2RQf4PaQOgdAdqhiKWyV)

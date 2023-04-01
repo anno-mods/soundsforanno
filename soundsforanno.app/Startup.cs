@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Hosting;
 using SoundsForAnno.Assetexport.Interfaces;
 using SoundsForAnno.Assetexport.Services;
-using SoundsForAnno.Transcription;
 using SoundsForAnno.App;
 using CommandLine;
 using Microsoft.Extensions.Logging;
+using SoundsForAnno.Transcription;
 
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
@@ -17,6 +17,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
         services.AddSingleton<ITextAssetExportService, AudioTextAssetExportService>();
         services.AddSingleton<ITranscriptorService, TranscriptorService>();
         services.AddSingleton<IMultiLanguageMapService, MultiLanguageMapService>();
+        services.AddSingleton<IDeepSpeechFactory, DeepSpeechFactory>();
     })
     .ConfigureLogging(builder => {
         builder.ClearProviders();

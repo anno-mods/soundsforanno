@@ -18,9 +18,9 @@ namespace SoundsForAnno.Transcription
         /// </summary>
         /// <param name="input_file"></param>
         /// <param name="output_file"></param>
-        public static async Task ReencodeWavAsync(String input_file, String output_file)
+        public static async Task ReencodeWavAsync(string input_file, string output_file)
         {
-            String parameters = $"-i {input_file} -y -f wav -bitexact -acodec pcm_s16le -ac 1 -ar 16000 -af \"adelay=1s:all=true\" {output_file}";
+            string parameters = $"-i {input_file} -y -f wav -bitexact -acodec pcm_s16le -ac 1 -ar 16000 -af \"adelay=1s:all=true\" {output_file}";
 
             using (Process p = new Process())
             {
@@ -34,9 +34,9 @@ namespace SoundsForAnno.Transcription
             }
         }
 
-        public static async Task ExtractBankAsync(String input_file)
+        public static async Task ExtractBankAsync(string input_file)
         {
-            String parameters = input_file;
+            string parameters = input_file;
             using (Process p = new Process())
             {
                 p.StartInfo.UseShellExecute = false;
@@ -49,9 +49,9 @@ namespace SoundsForAnno.Transcription
             }
         }
 
-        public static async Task ConvertWemToWavAsync(String input_wem, String output_wav)
+        public static async Task ConvertWemToWavAsync(string input_wem, string output_wav)
         {
-            String parameters = input_wem;
+            string parameters = input_wem;
             using (Process p = new Process())
             {
                 p.StartInfo.UseShellExecute = false;

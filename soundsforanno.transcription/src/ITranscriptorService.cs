@@ -4,8 +4,8 @@ namespace SoundsForAnno.Transcription
 {
     public interface ITranscriptorService
     {
-        void AddSoundbanks(String bnk_file);
+        void AddSoundbanks(string bnk_file);
         Task ProcessAsync();
-        Dictionary<String, TextGroup> GetResult();
+        Dictionary<string, TextGroup> GetResult();
     }
 }

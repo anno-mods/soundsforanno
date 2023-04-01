@@ -10,7 +10,7 @@ The tool uses Mozillas DeepSpeech with pretrained english models to autotranscri
 
 # Usage
 
-Sample Usage: ``` ./soundsforanno.exe gen -f <list_of_jsons> -g <start_guid> -a -s <list_of_bnks> ```
+Sample Usage: ``` ./soundsforanno.exe -f <list_of_jsons> -g <start_guid> -a -s <list_of_bnks> ```
 
 ### Detailed Arguments
 

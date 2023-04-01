@@ -1,5 +1,6 @@
 ﻿
 using CommandLine;
+using Microsoft.Extensions.Logging;
 using SoundsForAnno.Assetexport.Interfaces;
 using SoundsForAnno.Serializable;
 using SoundsForAnno.Transcription;
@@ -24,13 +25,15 @@ namespace SoundsForAnno.App
         IAudioAssetExportService _audioAssetExportService;
         ITextAssetExportService _textAssetExportService;
         ITranscriptorService _transcriptorService;
+        ILogger<SoundsForAnnoService> _logger; 
 
         public SoundsForAnnoService(
             IAutoGuidingService autoGuidingService,
             IMultiLanguageMapService multiLanguageMapService,
             IAudioAssetExportService audioExportService,
             ITextAssetExportService audioTextExportService,
-            ITranscriptorService transcriptorService
+            ITranscriptorService transcriptorService,
+            ILogger<SoundsForAnnoService> logger
         ) 
         {
             _autoGuidingService = autoGuidingService;
@@ -38,24 +41,35 @@ namespace SoundsForAnno.App
             _audioAssetExportService = audioExportService;
             _textAssetExportService = audioTextExportService;
             _transcriptorService = transcriptorService;
+            _logger = logger; 
         }
 
         public async Task RunAsync(SoundsForAnnoOptions o)
         {
             _autoGuidingService.ConfigureStartGuid(o.StartGuid);
 
+            if (o.SoundBankDocs is null || o.SoundBankDocs.Count() == 0)
+            {
+                _logger.LogError("No jsons to soundbanks were provided.");
+                return; 
+            }
+
             foreach (String s in o.SoundBankDocs)
             {
                 var bnk = JsonSerializer.Deserialize<WWISEJsonObject>(File.ReadAllText(s));
                 _multiLanguageMapService.AddSoundbankInfo(bnk);
             }
+
             var events = _multiLanguageMapService.GetEvents();
             _audioAssetExportService.AddAssets(events);
             var generated_audioassets = _audioAssetExportService.GetResult();
             generated_audioassets.Save(o.OutputFilename ?? "out.xml");
-
-            if (!o.GenerateAudioTexts || o.SoundBanks.Count() == 0)
+            
+            if (o.SoundBanks is null || o.SoundBanks.Count() == 0 || !o.GenerateAudioTexts)
+            {
+                _logger.LogError("No soundbank files were provided. Cannot transcribe and generate audio texts from nothing.");
                 return;
+            }
 
             foreach (String bnk in o.SoundBanks)
                 _transcriptorService.AddSoundbanks(bnk);

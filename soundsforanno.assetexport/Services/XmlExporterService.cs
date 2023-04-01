@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
+using System.IO;
 
 namespace SoundsForAnno.Assetexport.Services
 {
@@ -40,8 +41,9 @@ namespace SoundsForAnno.Assetexport.Services
 
         protected void ConfigureTemplate(String template_filename)
         {
+            var loadFrom = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, template_filename);
             var template_doc = new XmlDocument();
-            template_doc.Load(template_filename);
+            template_doc.Load(loadFrom);
             _template = template_doc.DocumentElement;
         }
 

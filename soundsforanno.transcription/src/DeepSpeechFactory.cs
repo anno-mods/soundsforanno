@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using SoundsForAnno.Serializable;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,15 +29,17 @@ namespace SoundsForAnno.Transcription
 
         private void TryConfigure(Language lang, String file_base)
         {
-            var base_model_name = $"{file_base}.pbmm";
+            var app_basepath = AppDomain.CurrentDomain.BaseDirectory;
+
+            var base_model_name = Path.Combine(app_basepath, $"{file_base}.pbmm");
             if (!File.Exists(base_model_name))
             {
                 _logger.LogInformation($"No language model was found for {lang} under {base_model_name}, thus no deep speech transcription could be configured for the language");
                 return;
             }
             var client = new DeepSpeech(base_model_name);
+            var scorer_name = Path.Combine(app_basepath, $"{file_base}.scorer");
 
-            var scorer_name = $"{file_base}.scorer";
             if (File.Exists(scorer_name))
                 client.EnableExternalScorer(scorer_name);
             else

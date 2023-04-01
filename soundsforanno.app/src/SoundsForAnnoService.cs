@@ -67,8 +67,11 @@ namespace SoundsForAnno.App
             _audioAssetExportService.AddAssets(events);
             var generated_audioassets = _audioAssetExportService.GetResult();
             generated_audioassets.Save(o.OutputFilename ?? "out.xml");
+
+            if (!o.GenerateAudioTexts)
+                return;
             
-            if (o.SoundBanks is null || o.SoundBanks.Count() == 0 || !o.GenerateAudioTexts)
+            if (o.SoundBanks is null || o.SoundBanks.Count() == 0)
             {
                 _logger.LogError("No soundbank files were provided. Cannot transcribe and generate audio texts from nothing.");
                 return;

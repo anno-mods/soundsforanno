@@ -9,9 +9,10 @@ namespace SoundsForAnno.Transcription
 {
     public class AudioTools
     {
-        static string bnkextr_path = "./lib/bnkextr.exe";
-        static string ffmpeg_path = "./lib/ffmpeg.exe";
-        static string vgmstream_path = "./lib/vgmstream/vgmstream.exe";
+        
+        static string bnkextr_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/bnkextr.exe");
+        static string ffmpeg_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/ffmpeg.exe");
+        static string vgmstream_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/vgmstream/vgmstream.exe");
 
         /// <summary>
         /// DeepSpeech is picky af about the wave it wants. 
